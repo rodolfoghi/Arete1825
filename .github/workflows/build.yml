@@ -45,9 +45,11 @@ jobs:
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"rodolfoghi_Arete1825" /o:"rodolfoghi-1" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.scanner.scanAll=false /d:sonar.cs.opencover.reportsPaths=coverage.xml
           dotnet build
-          coverlet .\tests\Web.API.Tests\bin\Debug\net9.0\Web.API.Tests.dll
-            --target "dotnet" 
-            --targetargs "test --no-build"
-            -f=opencover 
-            -o="coverage.xml"
+          $coverlet_params = @{
+              Target = "dotnet"
+              TargetArgs = "test --no-build"
+              Format = "opencover"
+              Output = "coverage.xml"
+          }
+          coverlet .\tests\Web.API.Tests\bin\Debug\net9.0\Web.API.Tests.dll @coverlet_params
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
