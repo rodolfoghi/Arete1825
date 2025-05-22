@@ -45,20 +45,3 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"rodolfoghi_Arete1825" /o:"rodolfoghi-1" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
-    
-      - name: SonarScanner for .NET 9 with pull request decoration support
-        uses: highbyte/sonarscan-dotnet@v2.4.2
-        with:
-          # The key of the SonarQube project
-          sonarProjectKey: rodolfoghi_Arete1825
-          # The name of the SonarQube project
-          sonarProjectName:  Arete1825
-          # The name of the SonarQube organization in SonarCloud. For hosted SonarQube, skip this setting.
-          sonarOrganization: rodolfoghi-1
-          # Optional command arguments to dotnet test
-          dotnetTestArguments: --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
-          # Optional extra command arguments the the SonarScanner 'begin' command
-          sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"        
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}          
