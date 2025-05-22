@@ -38,7 +38,7 @@ jobs:
         # The name of the SonarQube project
         sonarProjectName:  Arete1825
         # The name of the SonarQube organization in SonarCloud. For hosted SonarQube, skip this setting.
-        sonarOrganization: Rodolfo Ghiggi
+        sonarOrganization: rodolfoghi-1
         # Optional command arguments to dotnet test
         dotnetTestArguments: --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
         # Optional extra command arguments the the SonarScanner 'begin' command
